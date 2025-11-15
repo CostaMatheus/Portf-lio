@@ -153,6 +153,7 @@
 /*Mobile*/
 
 @media (max-width:1024px){
+
   .navbar-header {
     height: 96px;
   }
@@ -209,8 +210,8 @@
     width: 100%;
     flex-direction: column;
     justify-content: center;
-    gap: 4.8rem;
     background-color: #000000;
+    gap: 4.8rem;
     display: none;
     -webkit-animation: fadein 700ms;
     /* Safari, Chrome and Opera > 12.1 */
@@ -221,6 +222,13 @@
     -o-animation: fadein 700ms;
     /* Opera < 12.1 */
     animation: fadein 700ms;
+  }
+
+
+
+  .navbar-header:has(.links-container.active), .navbar-header.actived:has(.links-container.active) {
+    /* estilos aplicados no pai */
+    background-color: #000000;
   }
 
   .links-container #logo {
@@ -255,4 +263,5 @@
   #logo-mobile svg{
     width:160px;
   }
+
 }
