@@ -1,0 +1,258 @@
+.navbar-header {
+  width: 100%;
+  position: sticky;
+  text-align: center;
+  top: 0;
+  z-index:40;
+  background-color: transparent;
+  transition: background .3s ease;
+}
+
+.navbar-header.actived{
+  background-color: #000c;
+  transition: background .3s ease;
+}
+
+.scroll-dots {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 999;
+}
+
+.scroll-dots .dot {
+  width: 12px;
+  height: 12px;
+  background: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.scroll-dots .dot.active {
+  background: #fff;
+  transform: scale(1.3);
+}
+
+.navbar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 4.8rem;
+  padding-bottom: 4.8rem;
+  height: 140px;
+}
+
+#logo-mobile {
+  display: none;
+}
+
+.menu-hamburger {
+  width: 32px;
+  height: 32px;
+  padding: 0.4rem;
+  align-content: space-between;
+  justify-content: space-between;
+  flex-direction: column;
+  display: none;
+}
+
+.menu-hamburger span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #fff;
+  border-radius: 3px;
+}
+
+.links-container {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+}
+
+#logo {
+  display: block;
+  transition: transform .2s cubic-bezier(.55, .085, .68, .53);
+}
+
+#logo svg path{
+  transition: all .3s ease-in-out;
+}
+
+#logo:hover{
+  transform: scale(1.1);
+}
+
+
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3.2rem;
+}
+
+.menu a {
+  position: relative;
+  display: inline-block;
+  padding: 0.8rem 0;
+  font-size: 2.4rem;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.menu a.actived{
+  font-weight: 700;
+  transition: all .3s ease;
+}
+
+/*Border animation*/
+.menu a::after{
+  content: '';
+  background: #fff;
+  display: block;
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  transition: all 0.3s ease-in-out;
+}
+
+.menu a:hover::after{
+  width: 100%;
+}
+/*End of border animation*/
+
+.social-media {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.social-media a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform .2s cubic-bezier(.55, .085, .68, .53);
+}
+.social-media a:hover{
+  transform: scale(1.25);
+}
+
+.social-media a svg path{
+  transition: all .5s;
+}
+
+/*Mobile*/
+
+@media (max-width:1024px){
+  .navbar-header {
+    height: 96px;
+  }
+
+  .navbar {
+    padding-block: 3.2rem;
+    height: 96px;
+  }
+
+  .scroll-dots{
+    display: none;
+  }
+
+ #logo-mobile {
+    display: flex;
+  }
+
+  .menu-hamburger {
+    position: relative;
+    display: flex;
+  }
+
+  .menu-hamburger span {
+    transform: translate3d(-50%);
+    transition: all 700ms;
+  }
+
+  /*----------- MENU HAMBURGER ANIMATION ----------*/
+
+  .menu-hamburger.active span {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate3d(-50%);
+    transition: all 700ms;
+  }
+
+  .menu-hamburger.active span:nth-of-type(1) {
+    transform: rotate(45deg);
+  }
+
+  .menu-hamburger.active span:nth-of-type(2) {
+    opacity: 0;
+  }
+
+  .menu-hamburger.active span:nth-of-type(3) {
+    transform: rotate(-45deg);
+  }
+
+  .links-container {
+    position: fixed;
+    top: 96px;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4.8rem;
+    background-color: #000000;
+    display: none;
+    -webkit-animation: fadein 700ms;
+    /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 700ms;
+    /* Firefox < 16 */
+    -ms-animation: fadein 700ms;
+    /* Internet Explorer */
+    -o-animation: fadein 700ms;
+    /* Opera < 12.1 */
+    animation: fadein 700ms;
+  }
+
+  .links-container #logo {
+    display: none;
+  }
+
+  .links-container.active {
+    height: calc(100vh - 96px);
+    display: flex;
+  }
+
+  .menu {
+    flex-direction: column;
+  }
+
+  .menu a {
+    padding-block: 1.6rem;
+  }
+
+  .social-media {
+    justify-content: center;
+    align-items: center;
+    gap: 1.6rem;
+  }
+
+  .nav-dot-container {
+    display: none;
+  }
+}
+
+@media (max-width:480px){
+  #logo-mobile svg{
+    width:160px;
+  }
+}
