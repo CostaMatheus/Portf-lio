@@ -1,0 +1,68 @@
+.tab-bar-nav{
+  width: 100%;
+  position: relative;
+}
+
+.tab-bar-nav ul{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3.2rem;
+}
+
+.tab-bar-nav ul li a{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2.4rem;
+  width: 100%;
+  min-width: 260px;
+  min-height: 64px;
+  border-radius: 6.4rem;
+  font-size: 2.4rem;
+  font-family: var(--outfit);
+  gap: 1.2rem;
+  background-color: var(--neutral-08);
+  cursor: pointer;
+}
+
+.tab-bar-nav ul li:nth-of-type(1) a{
+  box-shadow: -2px -2px 8px rgba(130, 27, 252, .40);
+}
+.tab-bar-nav ul li:nth-of-type(2) a{
+  box-shadow: -2px -2px 8px rgba(255, 0, 200, .40);
+}
+.tab-bar-nav ul li:nth-of-type(3) a{
+  box-shadow: -2px -2px 8px rgba(0, 213, 232, .40);
+}
+.tab-bar-nav ul li:nth-of-type(4) a{
+  box-shadow: -2px -2px 8px rgba(206, 231, 39, .40);
+}
+
+.tab-bar-nav ul li a::after{
+  content: '';
+  width: 50%;
+  height: 64px;
+  border-radius: 6.4rem;
+  position: absolute;
+  left: -1px;
+  top: -1px;
+  border: 1px solid;
+  z-index: -1;
+  opacity: .4;
+}
+
+.tab-bar-nav ul li:nth-of-type(1) a::after{
+  border-color: #821bfc;
+}
+
+.tab-bar-nav ul li:nth-of-type(2) a::after{
+  border-color: #ff00c8;
+}
+.tab-bar-nav ul li:nth-of-type(3) a::after{
+  border-color: var(--secondary-01);
+}
+.tab-bar-nav ul li:nth-of-type(4) a::after{
+  border-color: var(--tertiary-01);
+}

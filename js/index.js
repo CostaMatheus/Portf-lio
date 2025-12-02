@@ -46,7 +46,7 @@ function scrollSection(event) {
   const section = document.querySelector(href);
   if (!section) return;
 
-  const targetY = section.offsetTop - 140; // compensação do header
+  const targetY = section.offsetTop - 120; // compensação do header
   const startY = window.scrollY;
   const distance = targetY - startY;
   const duration = 600; // duração do scroll em ms
@@ -73,36 +73,42 @@ dots.forEach(dot => {
   if (href.startsWith('#')) dot.addEventListener('click', scrollSection);
 });
 
-// ======================
-// ScrollSpy + header ativo
-// ======================
-window.addEventListener('scroll', () => {
-  const top = window.scrollY;
 
-  sections.forEach(section => {
-    const id = section.getAttribute('id');
-    const offset = section.offsetTop - 150;
-    const height = section.offsetHeight;
+// ===============================
+// ANIMAÇÃO DO HEADER (hide/show)
+// ===============================
 
-    if (top >= offset && top < offset + height) {
-      // links
-      links.forEach(l => l.classList.remove('actived'));
-      const menuLink = document.querySelector(`header a[href*="#${id}"], header a[href*="${id}"]`);
-      if (menuLink) menuLink.classList.add('actived');
+const headerElement = document.querySelector(".navbar-header");
+let lastScrollY = window.scrollY; // posição do scroll anterior
 
-      // dots
-      dots.forEach(d => d.classList.remove('active'));
-      const activeDot = document.querySelector(`.scroll-dots a[href="#${id}"], .scroll-dots a[href*="${id}"]`);
-      if (activeDot) activeDot.classList.add('active');
+window.addEventListener("scroll", () => {
+
+    const currentY = window.scrollY;
+
+    // --- 1. TOPO da página → header transparente ---
+    if (currentY <= 0) {
+        headerElement.classList.remove("hide");
+        headerElement.classList.remove("show");
+        headerElement.classList.add("top");
+        lastScrollY = currentY;
+        return;
     }
-  });
 
-  // header ativo
-  if (top > scrollInit) {
-    header.classList.add('actived');
-  } else {
-    header.classList.remove('actived');
-  }
+    // --- 2. Scroll DOWN → esconder header ---
+    if (currentY > lastScrollY) {
+        headerElement.classList.remove("top");
+        headerElement.classList.remove("show");
+        headerElement.classList.add("hide");
+    }
+
+    // --- 3. Scroll UP → mostrar header com fundo preto ---
+    else {
+        headerElement.classList.remove("hide");
+        headerElement.classList.remove("top");
+        headerElement.classList.add("show");
+    }
+
+    lastScrollY = currentY;
 });
 
 // ======================
@@ -163,3 +169,38 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
+// ========================
+// MODAL CURRÍCULO
+// ========================
+
+// Elementos
+const btnCurriculo = document.querySelector('a[href="#curriculo"]');
+const modal = document.getElementById('modal-resume');
+const closeModalBtn = document.querySelector('.close-modal');
+
+// Abrir modal
+if (btnCurriculo) {
+  btnCurriculo.addEventListener('click', function (event) {
+    event.preventDefault(); // impede scroll na página
+    modal.classList.add('active');
+  });
+}
+
+// Fechar modal ao clicar no X
+if (closeModalBtn) {
+  closeModalBtn.addEventListener('click', () => {
+    modal.classList.remove('active');
+  });
+}
+
+// Fechar modal clicando fora do conteúdo
+modal.addEventListener('click', (event) => {
+  if (event.target === modal) {
+    modal.classList.remove('active');
+  }
+});
+
+
+
+

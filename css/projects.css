@@ -1,5 +1,6 @@
 .projects{
   flex-direction: column;
+  min-height: auto !important;
   gap: 5.6rem;
 }
 

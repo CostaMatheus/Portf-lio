@@ -1,3 +1,11 @@
+/*Navbar header*/
+/* Header escondido */
+
+/* Header visível com fundo preto */
+
+
+/* Header visível transparente (somente no topo) */
+
 .navbar-header {
   width: 100%;
   position: sticky;
@@ -5,74 +13,32 @@
   top: 0;
   z-index:40;
   background-color: transparent;
-  transition: background .3s ease;
+  transition: background .35s ease;
 }
 
-.navbar-header.actived{
-  background-color: #000c;
-  transition: background .3s ease;
+.navbar-header.hide {
+  transform: translateY(-100%);
+  transition: transform 0.35s ease, background-color 0.35s ease;
 }
 
-.scroll-dots {
-  position: fixed;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  z-index: 999;
-}
-
-.scroll-dots .dot {
-  width: 12px;
-  height: 12px;
-  background: #ccc;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.scroll-dots .dot.active {
-  background: #fff;
-  transform: scale(1.3);
-}
-
-.navbar{
+.navbar-header nav{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 4.8rem;
-  padding-bottom: 4.8rem;
-  height: 140px;
+  padding-block: 3.2rem;
+  height: max-content;
 }
 
-#logo-mobile {
-  display: none;
+.navbar-header.show {
+    transform: translateY(0);
+    background-color: #000c;
+    transition: transform 0.35s ease, background-color 0.35s ease;
 }
 
-.menu-hamburger {
-  width: 32px;
-  height: 32px;
-  padding: 0.4rem;
-  align-content: space-between;
-  justify-content: space-between;
-  flex-direction: column;
-  display: none;
-}
-
-.menu-hamburger span {
-  display: block;
-  width: 100%;
-  height: 3px;
-  background-color: #fff;
-  border-radius: 3px;
-}
-
-.links-container {
-  display: flex;
-  justify-content: space-between;
-  flex: 1;
+.navbar-header.top {
+    background-color: transparent;
+    transform: translateY(0);
+    transition: transform 0.35s ease, background-color 0.35s ease;
 }
 
 #logo {
@@ -88,180 +54,125 @@
   transform: scale(1.1);
 }
 
+/*Scroll dots*/
+.scroll-dots {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 999;
+}
 
+.scroll-dots .dot {
+  width: 12px;
+  height: 12px;
+  background: var(--neutral-06);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.scroll-dots .dot.active {
+  background: var(--neutral-01);
+  transform: scale(1.3);
+}
+/*End of scroll dots*/
+
+.navbar-footer{
+  width: 100%;
+  position: sticky;
+  text-align: center;
+  bottom: 3.2rem;
+  z-index:40;
+  background-color: transparent;
+  transition: background .3s ease;
+}
+
+.navbar-footer nav{
+  width: max-content;
+  padding: 2.4rem;
+  height: 96px;
+  border-radius: 9.6rem;
+  background: var(--neutral-08);
+  gap: 1.6rem;
+}
 
 .menu {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 3.2rem;
+  gap: 1.6rem;
 }
 
 .menu a {
   position: relative;
-  display: inline-block;
-  padding: 0.8rem 0;
+  display: flex;
+  align-items: center;
+  justify-content:center ;
+  padding:0.8rem 2.0rem;
   font-size: 2.4rem;
-  color: #fff;
+  gap: 0.8rem;
+  min-height: 44px;
+  font-weight: 500;
+  color: var(--neutral-01);
   transition: all 0.3s ease;
+  border-radius: 44px;
 }
 
 .menu a.actived{
   font-weight: 700;
   transition: all .3s ease;
+  background: var(--neutral-01);
+  color: var(--neutral-08);
 }
 
-/*Border animation*/
+.menu a:hover{
+  color: var(--neutral-08);
+  background-color: var(--neutral-01);
+}
+
+.menu svg{
+  width: 20px;
+  height: 20px;
+}
+
+.menu a.actived svg path:nth-child(1){
+  fill: var(--neutral-08);
+}
+
+.menu a.actived svg path:nth-child(2){
+  fill: var(--primary-02);
+}
+
+.menu a:hover svg path:nth-child(1){
+  fill: var(--neutral-08);
+}
+
+.menu a:hover svg path:nth-child(2){
+  fill: var(--primary-02);
+}
+
+
+/*Border animation
 .menu a::after{
   content: '';
-  background: #fff;
+  background: var(--neutral-01);
   display: block;
   position: absolute;
-  bottom: 4px;
+  bottom: 0;
   left: 0;
   width: 0;
-  height: 1px;
+  height: 100%;
   transition: all 0.3s ease-in-out;
+  color: #000;
 }
 
 .menu a:hover::after{
   width: 100%;
 }
-/*End of border animation*/
 
-.social-media {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.8rem;
-}
+*/
 
-.social-media a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: transform .2s cubic-bezier(.55, .085, .68, .53);
-}
-.social-media a:hover{
-  transform: scale(1.25);
-}
-
-.social-media a svg path{
-  transition: all .5s;
-}
-
-/*Mobile*/
-
-@media (max-width:1024px){
-
-  .navbar-header {
-    height: 96px;
-  }
-
-  .navbar {
-    padding-block: 3.2rem;
-    height: 96px;
-  }
-
-  .scroll-dots{
-    display: none;
-  }
-
- #logo-mobile {
-    display: flex;
-  }
-
-  .menu-hamburger {
-    position: relative;
-    display: flex;
-  }
-
-  .menu-hamburger span {
-    transform: translate3d(-50%);
-    transition: all 700ms;
-  }
-
-  /*----------- MENU HAMBURGER ANIMATION ----------*/
-
-  .menu-hamburger.active span {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translate3d(-50%);
-    transition: all 700ms;
-  }
-
-  .menu-hamburger.active span:nth-of-type(1) {
-    transform: rotate(45deg);
-  }
-
-  .menu-hamburger.active span:nth-of-type(2) {
-    opacity: 0;
-  }
-
-  .menu-hamburger.active span:nth-of-type(3) {
-    transform: rotate(-45deg);
-  }
-
-  .links-container {
-    position: fixed;
-    top: 96px;
-    left: 0;
-    width: 100%;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #000000;
-    gap: 4.8rem;
-    display: none;
-    -webkit-animation: fadein 700ms;
-    /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: fadein 700ms;
-    /* Firefox < 16 */
-    -ms-animation: fadein 700ms;
-    /* Internet Explorer */
-    -o-animation: fadein 700ms;
-    /* Opera < 12.1 */
-    animation: fadein 700ms;
-  }
-
-
-
-  .navbar-header:has(.links-container.active), .navbar-header.actived:has(.links-container.active) {
-    /* estilos aplicados no pai */
-    background-color: #000000;
-  }
-
-  .links-container #logo {
-    display: none;
-  }
-
-  .links-container.active {
-    height: calc(100vh - 96px);
-    display: flex;
-  }
-
-  .menu {
-    flex-direction: column;
-  }
-
-  .menu a {
-    padding-block: 1.6rem;
-  }
-
-  .social-media {
-    justify-content: center;
-    align-items: center;
-    gap: 1.6rem;
-  }
-
-  .nav-dot-container {
-    display: none;
-  }
-}
-
-@media (max-width:480px){
-  #logo-mobile svg{
-    width:160px;
-  }
-
-}

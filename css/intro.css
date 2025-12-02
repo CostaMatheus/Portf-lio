@@ -1,7 +1,6 @@
 
 .hero{
   align-items: center;
-  padding-top: 0;
 }
 
 .hero-content{
@@ -30,7 +29,7 @@
 .floating-item {
   position: absolute;
   padding: 0.8rem 2.0rem;
-  border: 2px solid #fff;
+  border: 2px solid var(--neutral-01);
   border-radius: 4.8rem;
   white-space: nowrap; /* Impede a quebra de linha */
   z-index: 10; /* Garante que fique acima do texto */
@@ -40,7 +39,7 @@
 .floating-item .tag {
   font-size: 2.4rem;
   font-family: var(--outfit);
-  color: #fff;
+  color: var(--neutral-01);
   font-weight: 300;
 }
 

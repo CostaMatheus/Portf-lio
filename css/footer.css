@@ -1,3 +1,7 @@
+.contact{
+  min-height: auto !important;
+}
+
 .contact-container {
   width: 100%;
   display: flex;
