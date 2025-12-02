@@ -32,6 +32,17 @@
   padding: 2.4rem;
 }
 
+.controls{
+  width: 100%;
+}
+
+.controls ul{
+  display: flex;
+  gap: .8rem;
+  width: 100%;
+  justify-content: flex-end;
+}
+
 /* Conteúdo */
 
 .modal-content {
