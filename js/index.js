@@ -1,18 +1,90 @@
-// ======================
-// Seleção de elementos
-// ======================
+// ===============================
+// ELEMENTOS PRINCIPAIS
+// ===============================
+const header = document.querySelector(".navbar-header");
+const menuLinks = document.querySelectorAll(".js-link");
+const sections = document.querySelectorAll(".section");
 const menuHamburger = document.querySelector(".menu-hamburger");
 const linksContainer = document.querySelector(".links-container");
-const header = document.getElementById('js-header');
-const scrollInit = 60;
 
-const links = document.querySelectorAll('.js-link');
-const dots = document.querySelectorAll('.scroll-dots .dot');
-const sections = document.querySelectorAll('.section');
 
-// ======================
-// Toggle menu hamburger (mobile)
-// ======================
+// ===============================
+// HEADER — SUMIR / APARECER
+// ===============================
+let lastY = 0;
+
+function handleHeaderScroll() {
+  const currentY = window.scrollY;
+
+  // topo da página → header transparente
+  if (currentY <= 0) {
+    header.classList.remove("hide", "show");
+    header.classList.add("top");
+    lastY = currentY;
+    return;
+  }
+
+  // rolando para baixo → esconder
+  if (currentY > lastY) {
+    header.classList.remove("top", "show");
+    header.classList.add("hide");
+  }
+  // rolando para cima → mostrar
+  else {
+    header.classList.remove("hide", "top");
+    header.classList.add("show");
+  }
+
+  lastY = currentY;
+}
+
+window.addEventListener("scroll", handleHeaderScroll);
+
+
+// ===============================
+// SCROLL SUAVE
+// ===============================
+function smoothScroll(event) {
+  event.preventDefault();
+
+  const target = document.querySelector(event.currentTarget.getAttribute("href"));
+  if (!target) return;
+
+  const headerHeight = header.offsetHeight; // altura REAL do header
+
+  const targetY = target.getBoundingClientRect().top + window.scrollY - headerHeight;
+
+  window.scrollTo({
+    top: targetY,
+    behavior: "smooth"
+  });
+}
+
+
+// ===============================
+// ATIVAR LINK DO MENU CONFORME A SEÇÃO
+// ===============================
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    const id = entry.target.getAttribute("id");
+
+    if (entry.isIntersecting) {
+      // remover ativo dos outros
+      menuLinks.forEach(link => link.classList.remove("actived"));
+
+      // ativar o atual
+      const activeLink = document.querySelector(`.js-link[href="#${id}"]`);
+      if (activeLink) activeLink.classList.add("actived");
+    }
+  });
+}, { threshold: 0.55 });
+
+sections.forEach(sec => sectionObserver.observe(sec));
+
+
+// ===============================
+// MOBILE MENU (caso exista)
+// ===============================
 if (menuHamburger) {
   menuHamburger.addEventListener("click", () => {
     linksContainer.classList.toggle("active");
@@ -20,96 +92,38 @@ if (menuHamburger) {
   });
 }
 
-// Fecha o menu caso o usuário role
-window.addEventListener('scroll', () => {
+window.addEventListener("scroll", () => {
   if (linksContainer) linksContainer.classList.remove("active");
   if (menuHamburger) menuHamburger.classList.remove("active");
 });
 
-// ======================
-// Função de scroll suave manual
-// ======================
-function scrollSection(event) {
-  if (event && event.preventDefault) event.preventDefault();
-
-  let href;
-  if (event && event.currentTarget) {
-    href = event.currentTarget.getAttribute('href');
-  } else if (typeof event === 'string') {
-    href = event;
-  } else {
-    return;
-  }
-
-  if (!href || !href.startsWith('#')) return;
-
-  const section = document.querySelector(href);
-  if (!section) return;
-
-  const targetY = section.offsetTop - 120; // compensação do header
-  const startY = window.scrollY;
-  const distance = targetY - startY;
-  const duration = 600; // duração do scroll em ms
-  let startTime = null;
-
-  function animateScroll(timestamp) {
-    if (!startTime) startTime = timestamp;
-    const progress = Math.min((timestamp - startTime) / duration, 1);
-    const ease = 1 - Math.pow(1 - progress, 3); // ease-out
-    window.scrollTo(0, startY + distance * ease);
-    if (progress < 1) requestAnimationFrame(animateScroll);
-  }
-
-  requestAnimationFrame(animateScroll);
-}
-
-// Conecta clique dos links e dots
-links.forEach(link => {
-  const href = link.getAttribute('href') || '';
-  if (href.startsWith('#')) link.addEventListener('click', scrollSection);
-});
-dots.forEach(dot => {
-  const href = dot.getAttribute('href') || '';
-  if (href.startsWith('#')) dot.addEventListener('click', scrollSection);
-});
-
 
 // ===============================
-// ANIMAÇÃO DO HEADER (hide/show)
+// BOTÃO "VER MAIS" PROJETOS
 // ===============================
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("toggle-projects-btn");
+  const container = document.querySelector(".projects-card-container");
 
-const headerElement = document.querySelector(".navbar-header");
-let lastScrollY = window.scrollY; // posição do scroll anterior
+  if (!btn || !container) return;
 
-window.addEventListener("scroll", () => {
+  const extraCards = container.querySelectorAll(".card-item.hidden");
+  let expanded = false;
 
-    const currentY = window.scrollY;
+  btn.addEventListener("click", e => {
+    e.preventDefault();
+    expanded = !expanded;
 
-    // --- 1. TOPO da página → header transparente ---
-    if (currentY <= 0) {
-        headerElement.classList.remove("hide");
-        headerElement.classList.remove("show");
-        headerElement.classList.add("top");
-        lastScrollY = currentY;
-        return;
+    if (expanded) {
+      extraCards.forEach(card => card.classList.remove("hidden"));
+      btn.textContent = "Ver menos";
+    } else {
+      extraCards.forEach(card => card.classList.add("hidden"));
+      btn.textContent = "Ver mais";
     }
-
-    // --- 2. Scroll DOWN → esconder header ---
-    if (currentY > lastScrollY) {
-        headerElement.classList.remove("top");
-        headerElement.classList.remove("show");
-        headerElement.classList.add("hide");
-    }
-
-    // --- 3. Scroll UP → mostrar header com fundo preto ---
-    else {
-        headerElement.classList.remove("hide");
-        headerElement.classList.remove("top");
-        headerElement.classList.add("show");
-    }
-
-    lastScrollY = currentY;
+  });
 });
+
 
 // ======================
 // IntersectionObserver para animação de seções
@@ -169,38 +183,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
-
-// ========================
-// MODAL CURRÍCULO
-// ========================
-
-// Elementos
-const btnCurriculo = document.querySelector('a[href="#curriculo"]');
-const modal = document.getElementById('modal-resume');
-const closeModalBtn = document.querySelector('.close-modal');
-
-// Abrir modal
-if (btnCurriculo) {
-  btnCurriculo.addEventListener('click', function (event) {
-    event.preventDefault(); // impede scroll na página
-    modal.classList.add('active');
-  });
-}
-
-// Fechar modal ao clicar no X
-if (closeModalBtn) {
-  closeModalBtn.addEventListener('click', () => {
-    modal.classList.remove('active');
-  });
-}
-
-// Fechar modal clicando fora do conteúdo
-modal.addEventListener('click', (event) => {
-  if (event.target === modal) {
-    modal.classList.remove('active');
-  }
-});
-
 
 
 

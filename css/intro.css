@@ -1,14 +1,18 @@
 
 .hero{
   align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .hero-content{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   position: relative;
   max-width: 1280px;
+  gap: 1.6rem;
 }
 
 .hero-content h1{
@@ -52,26 +56,26 @@
 /* Posicionamento das Tags */
 .floating-item.ui-design {
   /* Posição no lado esquerdo superior */
-  top: 40%;
-  left: 5%; 
+  top: 35%;
+  left: 10%; 
 }
 
 .floating-item.ux-design {
   /* Posição no lado direito superior */
-  top: 45%;
-  right: 0; 
+  top: 35%;
+  right: 8%; 
 }
 
 .floating-item.branding {
   /* Posição no lado esquerdo inferior */
-  bottom: -15%;
-  left: 2.5%; 
+  top: 88%;
+  left: 15%; 
 }
 
 .floating-item.developing {
   /* Posição no lado direito inferior */
-  bottom: -15%;
-  right: 20%; 
+  top: 88%;
+  right: 15%; 
 }
 
 /* Posicionamento dos Ícones Flutuantes (Círculos Coloridos) */
@@ -83,17 +87,22 @@
 
 .icon-float.icon-blue{
   top: 50%;
-  left: 20%; 
+  left: 23%; 
 }
 
 .icon-float.icon-red{
   top: 40%;
-  right: 20%;
+  right: 24%;
+}
+
+.hero-btn{
+  position: relative;
+  font-size: 2.4rem;
 }
 
 .icon-float.icon-yellow{
-  bottom: -15%;
-  left: 42%; 
+  right: -32px; 
+  bottom: -32px;
 }
 
 .icon-float.icon-purple{
@@ -102,7 +111,7 @@
 }
 
 .icon-float.icon-orange{
-  top: -10%;
+  top: -5%;
   right: 25%;
 }
 /* Repita para .icon-blue, .icon-red, .icon-yellow, .icon-purple ajustando top/left/right/bottom */

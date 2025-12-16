@@ -1,13 +1,206 @@
 .about{
   flex-direction: column;
-  
+  gap: 6.4rem;
 }
 
 .about p{
-  margin-top: 4.8rem;
-  max-width: 960px;
-  font-size: 2.4rem;
-  text-align: center;
-  font-weight: 500;
-  line-height: 3.2rem;
+  font-size: 1.8rem;
+  line-height: 2.6rem;
+}
+
+.resume-container{
+  display: grid;
+  grid-template-columns: max-content 1fr;
+
+  gap: 2.4rem;
+}
+
+.resume-col{
+  gap: 4.8rem;
+  height: max-content;
+}
+
+.resume-col:nth-of-type(1){
+  display: grid;
+  grid-template-areas: 
+  "photo"
+  "contact"
+}
+
+.resume-col:nth-of-type(2){
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: 
+  "intro intro"
+  "experience education"
+  "experience hability"
+  "experience software"
+}
+
+.resume-row{
+  display: flex;
+  flex: 1;
+  gap: 2.4rem;
+}
+
+.resume-tag{
+  position: absolute;
+  left: 2.4rem;
+  top: -2.4rem;
+}
+
+.resume-photo{
+  grid-area: photo;
+}
+
+.resume-contact{
+  grid-area: contact;
+}
+
+.resume-contact-links{
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.resume-contact-links li{
+  display: flex;
+  gap: 0.8rem;
+}
+
+.resume-contact-links li a{
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.resume-contact-links span{
+  display: inline-block;
+  font-size: 1.8rem;
+  font-family: var(--zilla);
+  color: var(--neutral-00);
+}
+
+
+.resume-intro{
+  grid-area:intro;
+  background-color: var(--neutral-08);
+  padding: 2.4rem;
+  border-radius: 1.6rem;
+  position: relative;
+  height: max-content;
+}
+
+.resume-intro p{
+  font-size: 1.8rem;
+}
+
+.resume-experience{
+  grid-area:experience;
+}
+
+.experience-content{
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.experience-item{
+  padding: 2.4rem;
+  background-color: var(--neutral-07);
+  border-radius: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.experience-item span{
+  font-size: 1.2rem;
+  line-height: 1.4rem;
+  font-family: var(--outfit);
+  font-weight: 600;
+  color: var(--neutral-04);
+}
+
+.resume-education{
+  grid-area:education;
+}
+
+.resume-hability{
+  grid-area:hability;
+}
+
+.resume-software{
+  grid-area:software;
+}
+
+
+.resume-content{
+  background-color: var(--neutral-08);
+  padding: 4.8rem 2.4rem 2.4rem 2.4rem;
+  border-radius: 1.6rem;
+  position: relative;
+}
+
+.resume-intro{
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+.resume-content p{
+  text-align: left;
+}
+
+/* Education area */
+
+.education-content{
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.education-item{
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.education-item span{
+  font-family: var(--outfit);
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  font-weight: 600;
+  color: var(--neutral-04);
+}
+
+/* Hability */
+
+.hability-content{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+}
+
+.hability-item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hability-item{
+  font-family: var(--zilla);
+  font-size: 1.8rem;
+  color: var(--neutral-00);
+  padding: 0.8rem 1.6rem;
+  background: var(--neutral-07);
+  border-radius: 4.2rem;
+  height: 4.2rem;
+}
+
+/*Software */
+
+.software-content{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem;
 }
