@@ -7,7 +7,6 @@ const sections = document.querySelectorAll(".section");
 const menuHamburger = document.querySelector(".menu-hamburger");
 const linksContainer = document.querySelector(".links-container");
 
-
 // ===============================
 // HEADER — SUMIR / APARECER
 // ===============================
@@ -16,7 +15,6 @@ let lastY = 0;
 function handleHeaderScroll() {
   const currentY = window.scrollY;
 
-  // topo da página → header transparente
   if (currentY <= 0) {
     header.classList.remove("hide", "show");
     header.classList.add("top");
@@ -24,13 +22,10 @@ function handleHeaderScroll() {
     return;
   }
 
-  // rolando para baixo → esconder
   if (currentY > lastY) {
     header.classList.remove("top", "show");
     header.classList.add("hide");
-  }
-  // rolando para cima → mostrar
-  else {
+  } else {
     header.classList.remove("hide", "top");
     header.classList.add("show");
   }
@@ -38,68 +33,103 @@ function handleHeaderScroll() {
   lastY = currentY;
 }
 
-window.addEventListener("scroll", handleHeaderScroll);
-
+window.addEventListener("scroll", handleHeaderScroll, { passive: true });
 
 // ===============================
 // SCROLL SUAVE
 // ===============================
-function smoothScroll(event) {
-  event.preventDefault();
+menuLinks.forEach(link => {
+  link.addEventListener("click", event => {
+    event.preventDefault();
 
-  const target = document.querySelector(event.currentTarget.getAttribute("href"));
-  if (!target) return;
+    const target = document.querySelector(
+      event.currentTarget.getAttribute("href")
+    );
 
-  const headerHeight = header.offsetHeight; // altura REAL do header
+    if (!target) return;
 
-  const targetY = target.getBoundingClientRect().top + window.scrollY - headerHeight;
+    const headerHeight = header.offsetHeight;
+    const targetY =
+      target.getBoundingClientRect().top +
+      window.scrollY -
+      headerHeight;
 
-  window.scrollTo({
-    top: targetY,
-    behavior: "smooth"
+    window.scrollTo({
+      top: targetY,
+      behavior: "smooth"
+    });
+
+    // fechar menu mobile ao clicar
+    if (linksContainer) linksContainer.classList.remove("active");
+    if (menuHamburger) menuHamburger.classList.remove("active");
   });
-}
-
-
-// ===============================
-// ATIVAR LINK DO MENU CONFORME A SEÇÃO
-// ===============================
-const sectionObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    const id = entry.target.getAttribute("id");
-
-    if (entry.isIntersecting) {
-      // remover ativo dos outros
-      menuLinks.forEach(link => link.classList.remove("actived"));
-
-      // ativar o atual
-      const activeLink = document.querySelector(`.js-link[href="#${id}"]`);
-      if (activeLink) activeLink.classList.add("actived");
-    }
-  });
-}, { threshold: 0.55 });
-
-sections.forEach(sec => sectionObserver.observe(sec));
-
-
-// ===============================
-// MOBILE MENU (caso exista)
-// ===============================
-if (menuHamburger) {
-  menuHamburger.addEventListener("click", () => {
-    linksContainer.classList.toggle("active");
-    menuHamburger.classList.toggle("active");
-  });
-}
-
-window.addEventListener("scroll", () => {
-  if (linksContainer) linksContainer.classList.remove("active");
-  if (menuHamburger) menuHamburger.classList.remove("active");
 });
 
+// ===============================
+// ATIVAR LINK DO MENU
+// ===============================
+const sectionObserver = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+
+      const id = entry.target.getAttribute("id");
+
+      menuLinks.forEach(link => link.classList.remove("actived"));
+
+      const activeLink = document.querySelector(
+        `.js-link[href="#${id}"]`
+      );
+
+      if (activeLink) activeLink.classList.add("actived");
+    });
+  },
+  { threshold: 0.55 }
+);
+
+sections.forEach(section => sectionObserver.observe(section));
 
 // ===============================
-// BOTÃO "VER MAIS" PROJETOS
+// MENU MOBILE
+// ===============================
+if (menuHamburger && linksContainer) {
+  menuHamburger.addEventListener("click", () => {
+    menuHamburger.classList.toggle("active");
+    linksContainer.classList.toggle("active");
+  });
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      menuHamburger.classList.remove("active");
+      linksContainer.classList.remove("active");
+    },
+    { passive: true }
+  );
+}
+
+// ===============================
+// ANIMAÇÃO DAS SEÇÕES
+// ===============================
+const animationObserver = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        entry.target.classList.remove("hidden");
+      }
+    });
+  },
+  { threshold: 0.3 }
+);
+
+sections.forEach(section => {
+  section.classList.add("hidden");
+  animationObserver.observe(section);
+});
+
+// ===============================
+// BOTÃO "VER MAIS" — PROJETOS
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
   const btn = document.getElementById("toggle-projects-btn");
@@ -110,79 +140,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const extraCards = container.querySelectorAll(".card-item.hidden");
   let expanded = false;
 
-  btn.addEventListener("click", e => {
-    e.preventDefault();
+  btn.addEventListener("click", event => {
+    event.preventDefault();
     expanded = !expanded;
 
     if (expanded) {
       extraCards.forEach(card => card.classList.remove("hidden"));
       btn.textContent = "Ver menos";
     } else {
-      extraCards.forEach(card => card.classList.add("hidden"));
+      extraCards.forEach(card => {
+        setTimeout(() => card.classList.add("hidden"), 300);
+      });
       btn.textContent = "Ver mais";
     }
   });
 });
-
-
-// ======================
-// IntersectionObserver para animação de seções
-// ======================
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      entry.target.classList.remove('hidden');
-    } else {
-      entry.target.classList.remove('visible');
-      entry.target.classList.add('hidden');
-    }
-  });
-}, { threshold: 0.3 });
-
-sections.forEach(sec => {
-  sec.classList.add('hidden'); // começam invisíveis
-  observer.observe(sec);
-});
-
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  const btn = document.getElementById("toggle-projects-btn");
-  const cardContainer = document.querySelector(".projects-card-container");
-
-  // pega todos os card-item que estão escondidos
-  const extraCards = cardContainer.querySelectorAll(".card-item.hidden");
-
-  let expanded = false;
-
-  btn.addEventListener("click", (event) => {
-    event.preventDefault();
-    expanded = !expanded;
-
-    if (expanded) {
-      // MOSTRAR os cards extras
-      extraCards.forEach(card => {
-        card.classList.remove("hidden");   
-      });
-
-      btn.textContent = "Ver menos";
-
-    } else {
-      // ESCONDER os cards
-      extraCards.forEach(card => {
-        // após a animação de recolher, recoloca a classe hidden
-        setTimeout(() => {
-          card.classList.add("hidden");
-        }, 300);
-      });
-
-      btn.textContent = "Ver mais";
-    }
-
-  });
-
-});
-
-
-

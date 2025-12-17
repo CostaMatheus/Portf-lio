@@ -175,7 +175,7 @@ img {
   align-items: center;
   position: relative;
   width: 100%;
-  min-height: calc(100vh - 120px);
+  min-height: calc(100vh - 128px);
   padding-block: 4.8rem;
   
     animation-duration: .8s;
@@ -184,12 +184,16 @@ img {
 }
 
 .section.visible {
-    animation-name: fadeInUp;
+  animation-name: fadeInUp;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* Quando sai → some instantaneamente */
 .section.hidden {
-    opacity: 0;
+  opacity: 0;
+  transform: translateY(40px);
+  pointer-events: none;
 }
 
 .container {

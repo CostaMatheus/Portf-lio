@@ -2,7 +2,7 @@
   width: 100%;
   position: sticky;
   text-align: center;
-  top: 0;
+  top: 3.2rem;
   z-index:40;
   background-color: transparent;
   transition: background .35s ease;
@@ -27,7 +27,6 @@
   border-radius: 9.6rem;
   background: var(--neutral-08);
   gap: 1.6rem;
-  top: 3.2rem;
 }
 
 .navbar-header.show {

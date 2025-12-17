@@ -1,4 +1,5 @@
-.about{ 
+.about{
+  display: flex;
   flex-direction: column;
   gap: 6.4rem;
 }
@@ -11,17 +12,20 @@
 .resume-container{
   display: grid;
   grid-template-columns: max-content 1fr;
-
   gap: 2.4rem;
+  align-items: start;
 }
 
 .resume-col{
+  display: flex;
+  flex-direction: column;
   gap: 4.8rem;
   height: max-content;
 }
 
 .resume-col:nth-of-type(1){
   display: grid;
+  gap: 2.4rem;
   grid-template-areas: 
   "photo"
   "contact"
@@ -29,7 +33,8 @@
 
 .resume-col:nth-of-type(2){
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4.8rem;
   grid-template-areas: 
   "intro intro"
   "experience education"
@@ -39,7 +44,6 @@
 
 .resume-row{
   display: flex;
-  flex: 1;
   gap: 2.4rem;
 }
 
@@ -147,6 +151,7 @@
   flex-direction: column;
   gap: 1.6rem;
 }
+
 .resume-content p{
   text-align: left;
 }
@@ -185,9 +190,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.hability-item{
   font-family: var(--zilla);
   font-size: 1.8rem;
   color: var(--neutral-00);
@@ -207,15 +209,14 @@
 
 
 @media (max-width:1280px){
-  .resume-col:nth-of-type(2){
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: 
-    "intro intro"
-    "experience experience"
-    "education education"
-    "hability hability"
-    "software software"
+  .resume-col:nth-of-type(2) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "intro"
+      "experience"
+      "education"
+      "hability"
+      "software";
   }
 }
 
@@ -226,7 +227,6 @@
   }
 
   .resume-container{
-    display: grid;
     grid-template-columns: 1fr;
     gap: 2.4rem;
   }
@@ -256,6 +256,9 @@
 }
 
 @media (max-width:640px){
+   .resume-content {
+    padding: 3.2rem 1.6rem 1.6rem;
+  }
   .about{
     flex-direction: column;
     gap: 3.2rem;
