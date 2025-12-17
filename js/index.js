@@ -7,7 +7,6 @@ const sections = document.querySelectorAll(".section");
 const menuHamburger = document.querySelector(".menu-hamburger");
 const linksContainer = document.querySelector(".links-container");
 
-
 // ======================================================
 // HEADER — SHOW / HIDE (DESKTOP + MOBILE)
 // ======================================================
@@ -20,12 +19,10 @@ function updateHeader() {
   if (currentY <= 0) {
     header.classList.remove("hide", "show");
     header.classList.add("top");
-  } 
-  else if (currentY > lastScrollY + 10) {
+  } else if (currentY > lastScrollY + 10) {
     header.classList.remove("top", "show");
     header.classList.add("hide");
-  } 
-  else if (currentY < lastScrollY - 10) {
+  } else if (currentY < lastScrollY - 10) {
     header.classList.remove("hide", "top");
     header.classList.add("show");
   }
@@ -44,17 +41,18 @@ function onScroll() {
 window.addEventListener("scroll", onScroll, { passive: true });
 window.addEventListener("touchmove", onScroll, { passive: true });
 
-
 // ======================================================
-// SCROLL SUAVE
+// SCROLL SUAVE — TOPO REAL DA SEÇÃO
 // ======================================================
 function smoothScroll(e) {
   e.preventDefault();
 
-  const targetId = e.currentTarget.getAttribute("href");
-  const target = document.querySelector(targetId);
+  const target = document.querySelector(
+    e.currentTarget.getAttribute("href")
+  );
   if (!target) return;
 
+  // força header visível antes do cálculo
   header.classList.remove("hide");
   header.classList.add("show");
 
@@ -69,6 +67,7 @@ function smoothScroll(e) {
     behavior: "smooth"
   });
 
+  // fecha menu mobile
   linksContainer?.classList.remove("active");
   menuHamburger?.classList.remove("active");
 }
@@ -77,9 +76,8 @@ menuLinks.forEach(link =>
   link.addEventListener("click", smoothScroll)
 );
 
-
 // ======================================================
-// MENU ATIVO — INTERSECTION OBSERVER
+// MENU ATIVO — INTERSECTION OBSERVER (ROBUSTO)
 // ======================================================
 const menuObserver = new IntersectionObserver(
   entries => {
@@ -87,20 +85,21 @@ const menuObserver = new IntersectionObserver(
       if (!entry.isIntersecting) return;
 
       const id = entry.target.id;
-      if (!id) return;
 
       menuLinks.forEach(link =>
         link.classList.remove("actived")
       );
 
-      document
-        .querySelector(`.js-link[href="#${id}"]`)
-        ?.classList.add("actived");
+      const active = document.querySelector(
+        `.js-link[href="#${id}"]`
+      );
+
+      active?.classList.add("actived");
     });
   },
   {
-    rootMargin: "-40% 0px -40% 0px",
-    threshold: 0
+    threshold: 0,
+    rootMargin: "-35% 0px -50% 0px"
   }
 );
 
@@ -108,19 +107,24 @@ sections.forEach(section =>
   menuObserver.observe(section)
 );
 
-
 // ======================================================
-// ANIMAÇÃO — ENTRA E SAI (IDA E VOLTA)
+// ANIMAÇÃO DAS SEÇÕES (IDA + VOLTA)
+// projects NÃO volta para hidden
 // ======================================================
 const animationObserver = new IntersectionObserver(
   entries => {
     entries.forEach(entry => {
+      const section = entry.target;
+      const isProjects = section.id === "projects";
+
       if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        entry.target.classList.remove("hidden");
+        section.classList.add("visible");
+        section.classList.remove("hidden");
       } else {
-        entry.target.classList.remove("visible");
-        entry.target.classList.add("hidden");
+        if (!isProjects) {
+          section.classList.remove("visible");
+          section.classList.add("hidden");
+        }
       }
     });
   },
@@ -130,19 +134,18 @@ const animationObserver = new IntersectionObserver(
   }
 );
 
-// todas começam ocultas
+// estado inicial
 sections.forEach(section => {
   section.classList.add("hidden");
   animationObserver.observe(section);
 });
-
 
 // ======================================================
 // MENU MOBILE
 // ======================================================
 menuHamburger?.addEventListener("click", () => {
   linksContainer?.classList.toggle("active");
-  menuHamburger?.classList.toggle("active");
+  menuHamburger.classList.toggle("active");
 });
 
 window.addEventListener("scroll", () => {
@@ -150,26 +153,30 @@ window.addEventListener("scroll", () => {
   menuHamburger?.classList.remove("active");
 });
 
-
 // ======================================================
-// BOTÃO "VER MAIS" — PROJETOS
+// VER MAIS — PROJECTS (SEM FLICKER)
 // ======================================================
 document.addEventListener("DOMContentLoaded", () => {
   const btn = document.getElementById("toggle-projects-btn");
-  const container = document.querySelector(".projects-card-container");
+  const cards = document.querySelectorAll(".card-item");
 
-  if (!btn || !container) return;
+  if (!btn || !cards.length) return;
 
-  const extraCards = container.querySelectorAll(".card-item.hidden");
   let expanded = false;
 
   btn.addEventListener("click", e => {
     e.preventDefault();
     expanded = !expanded;
 
-    extraCards.forEach(card =>
-      card.classList.toggle("hidden", !expanded)
-    );
+    cards.forEach((card, i) => {
+      if (expanded) {
+        card.classList.remove("hidden");
+        setTimeout(() => card.classList.add("visible"), i * 60);
+      } else {
+        card.classList.remove("visible");
+        setTimeout(() => card.classList.add("hidden"), 300);
+      }
+    });
 
     btn.textContent = expanded ? "Ver menos" : "Ver mais";
   });

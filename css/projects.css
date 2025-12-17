@@ -2,6 +2,7 @@
   flex-direction: column;
   min-height: auto !important;
   gap: 6.4rem;
+  pointer-events: auto;
 }
 
 .projects-card-container{
@@ -45,6 +46,12 @@
   overflow: hidden;
   transform: scale(.9);
   pointer-events: none;
+  visibility: hidden;
+}
+
+.card-item.visible{
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .card-item-link{
