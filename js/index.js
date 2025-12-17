@@ -20,10 +20,12 @@ function updateHeader() {
   if (currentY <= 0) {
     header.classList.remove("hide", "show");
     header.classList.add("top");
-  } else if (currentY > lastScrollY + 10) {
+  } 
+  else if (currentY > lastScrollY + 10) {
     header.classList.remove("top", "show");
     header.classList.add("hide");
-  } else if (currentY < lastScrollY - 10) {
+  } 
+  else if (currentY < lastScrollY - 10) {
     header.classList.remove("hide", "top");
     header.classList.add("show");
   }
@@ -44,7 +46,7 @@ window.addEventListener("touchmove", onScroll, { passive: true });
 
 
 // ======================================================
-// SCROLL SUAVE — TOPO REAL DA SEÇÃO
+// SCROLL SUAVE — TOPO CORRETO DA SEÇÃO
 // ======================================================
 function smoothScroll(e) {
   e.preventDefault();
@@ -65,12 +67,12 @@ function smoothScroll(e) {
 
   window.scrollTo({
     top: targetY,
-    behavior: "smooth",
+    behavior: "smooth"
   });
 
   // fecha menu mobile
-  if (linksContainer) linksContainer.classList.remove("active");
-  if (menuHamburger) menuHamburger.classList.remove("active");
+  linksContainer?.classList.remove("active");
+  menuHamburger?.classList.remove("active");
 }
 
 menuLinks.forEach(link =>
@@ -79,15 +81,15 @@ menuLinks.forEach(link =>
 
 
 // ======================================================
-// MENU ATIVO — INTERSECTION OBSERVER
-// (corrige About e sections pequenas)
+// MENU ATIVO — INTERSECTION OBSERVER (ROBUSTO)
 // ======================================================
 const menuObserver = new IntersectionObserver(
   entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
 
-      const id = entry.target.getAttribute("id");
+      const id = entry.target.id;
+      if (!id) return;
 
       menuLinks.forEach(link =>
         link.classList.remove("actived")
@@ -97,12 +99,12 @@ const menuObserver = new IntersectionObserver(
         `.js-link[href="#${id}"]`
       );
 
-      if (activeLink) activeLink.classList.add("actived");
+      activeLink?.classList.add("actived");
     });
   },
   {
-    rootMargin: "-35% 0px -50% 0px",
-    threshold: 0,
+    rootMargin: "-35% 0px -45% 0px",
+    threshold: 0
   }
 );
 
@@ -112,7 +114,7 @@ sections.forEach(section =>
 
 
 // ======================================================
-// ANIMAÇÃO DE SEÇÕES (SEGURA)
+// ANIMAÇÃO DE SEÇÕES (SEGURA E COMPATÍVEL COM SEU CSS)
 // ======================================================
 const animationObserver = new IntersectionObserver(
   entries => {
@@ -125,16 +127,19 @@ const animationObserver = new IntersectionObserver(
     });
   },
   {
-    threshold: 0.01,
-    rootMargin: "0px 0px -10% 0px",
+    threshold: 0,
+    rootMargin: "0px 0px -15% 0px"
   }
 );
 
 sections.forEach(section => {
-  // NÃO esconder About
-  if (section.id !== "about") {
+  // About SEMPRE visível
+  if (section.id === "about") {
+    section.classList.add("visible");
+  } else {
     section.classList.add("hidden");
   }
+
   animationObserver.observe(section);
 });
 
@@ -142,16 +147,14 @@ sections.forEach(section => {
 // ======================================================
 // MENU MOBILE
 // ======================================================
-if (menuHamburger) {
-  menuHamburger.addEventListener("click", () => {
-    linksContainer.classList.toggle("active");
-    menuHamburger.classList.toggle("active");
-  });
-}
+menuHamburger?.addEventListener("click", () => {
+  linksContainer?.classList.toggle("active");
+  menuHamburger?.classList.toggle("active");
+});
 
 window.addEventListener("scroll", () => {
-  if (linksContainer) linksContainer.classList.remove("active");
-  if (menuHamburger) menuHamburger.classList.remove("active");
+  linksContainer?.classList.remove("active");
+  menuHamburger?.classList.remove("active");
 });
 
 
