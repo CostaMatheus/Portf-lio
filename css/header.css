@@ -1,5 +1,5 @@
 .navbar-header {
-  width: 100%;
+  width: calc(100% - 4.0rem);
   position: sticky;
   text-align: center;
   top: 3.2rem;
@@ -112,15 +112,6 @@
 
 
 @media (max-width: 960px){
-  .navbar-header {
-    position: fixed;
-    top: 3.2rem;
-  }
-
-  .navbar-header.hide {
-    top: 0;
-  }
-
   .navbar-header nav{
     padding: 1.6rem;
     height: 64px;
