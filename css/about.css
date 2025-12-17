@@ -204,3 +204,49 @@
   flex-wrap: wrap;
   gap: 1.6rem;
 }
+
+
+@media (max-width:1280px){
+  .resume-col:nth-of-type(2){
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    "intro intro"
+    "experience experience"
+    "education education"
+    "hability hability"
+    "software software"
+  }
+}
+
+@media (max-width:1024px){
+
+  .resume-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.4rem;
+  }
+
+ .resume-col:nth-of-type(2){
+    order: 1;
+  }
+
+  .resume-col:nth-of-type(1){
+    order: 2;
+  }
+
+  .resume-col:nth-of-type(2){
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    "intro intro"
+    "experience experience"
+    "education education"
+    "hability hability"
+    "software software"
+  }
+
+  .resume-photo{
+    display: none;
+  }
+}

@@ -38,6 +38,7 @@
   white-space: nowrap; /* Impede a quebra de linha */
   z-index: 10; /* Garante que fique acima do texto */
   background-color: transparent; /* Ou a cor do seu fundo */
+  height: 5.0rem;
 }
 
 .floating-item .tag {
@@ -130,7 +131,7 @@
 
   .floating-item.ux-design {
     /* Posição no lado direito superior */
-    top: 55%;
+    top: 48%;
     right: 5%; 
   }
 
@@ -152,7 +153,7 @@
   }
 
   .icon-float.icon-blue{
-     top: 55%;
+     top: 50%;
     left: 20%; 
   }
 
@@ -168,7 +169,12 @@
 
   .icon-float.icon-purple{
     bottom: -2.5%;
-    right: 0%; 
+    right:5%; 
+  }
+
+  .icon-float.icon-yellow{
+    bottom: -67.5%;
+    left: 80%; 
   }
 }
 
@@ -180,15 +186,15 @@
 
   .floating-item.ui-design {
   /* Posição no lado esquerdo superior */
-  top: 45%;
+  top: 37%;
   bottom: auto;
   left: 7%; 
   }
 
   .floating-item.ux-design {
     /* Posição no lado direito superior */
-    top: 55%;
-    right: -5%; 
+    top: 37%;
+    right: 5%; 
     bottom: auto;
     left: auto;
   }
@@ -196,14 +202,14 @@
   .floating-item.branding {
     /* Posição no lado esquerdo inferior */
     bottom: -25%;
-    left: 21%; 
+    left: 14%; 
   }
 
   .floating-item.developing {
     /* Posição no lado direito inferior */
     bottom: -33%;
     right: auto; 
-    left: 55.8%;
+    left: 67.8%;
   }
 
   .icon-float.icon-pink { 
@@ -213,18 +219,20 @@
 
   .icon-float.icon-blue{
     top: auto;
-    bottom: -25%;
-    left: 5%; 
+    bottom: -5%;
+    left: 5%;
+    display: none;
   }
 
   .icon-float.icon-red{
     top: 40%;
     right: 17%;
+    display: none;
   }
 
   .icon-float.icon-yellow{
-    bottom: -25%;
-    left: 45%; 
+    bottom: -75%;
+    left: 80%; 
   }
 
   .icon-float.icon-purple{
@@ -239,8 +247,8 @@
 
   .floating-item.ux-design {
     /* Posição no lado direito superior */
-    top: 55%;
-    right: 0%; 
+    top: 35%;
+    right: 6%; 
     bottom: auto;
     left: auto;
   }
@@ -248,14 +256,14 @@
   .floating-item.branding {
     /* Posição no lado esquerdo inferior */
     bottom: -25%;
-    left: 21%; 
+    left: 11%; 
   }
 
   .floating-item.developing {
     /* Posição no lado direito inferior */
     bottom: -33%;
     right: auto; 
-    left: 55.8%;
+    left: 70%;
   }
 
   .icon-float.icon-pink { 
@@ -275,13 +283,14 @@
   }
 
   .icon-float.icon-yellow{
-    bottom: -35%;
-    left: 45%; 
+    bottom: -75%;
+    left: 85%; 
   }
 
   .icon-float.icon-purple{
     bottom: -15.5%;
     right: 0%; 
+    display: none;
   }
 
 }

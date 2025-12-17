@@ -111,4 +111,10 @@
 }
 
 
+@media (max-width: 960px){
+  .menu li a span{
+    display: none;
+  }
+}
+
 
