@@ -133,6 +133,7 @@
   #logo-mobile{
     display: block;
     height: 3.2rem;
+    max-width: 100%;
   }
 
   #logo-web{
