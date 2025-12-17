@@ -299,6 +299,7 @@
 @media (max-width: 960px) {
   .hero{
     align-items: center;
+    top: 9.6rem;
   }
 
  .hero-content{
