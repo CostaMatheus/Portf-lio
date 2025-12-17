@@ -312,9 +312,20 @@ img {
 }
 
 @media (max-width:640px){
+  html{
+    overflow-x: hidden;
+  }
+
+  .section {
+    min-height: calc(100vh - 120px);
+    padding-block: 3.2rem;
+  }
+
   .container{
     max-width: 100%;
   }
+
+  
 }
 
 @media (max-width:480px){

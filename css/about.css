@@ -221,6 +221,10 @@
 
 @media (max-width:1024px){
 
+  .about{
+    gap: 3.2rem;
+  }
+
   .resume-container{
     display: grid;
     grid-template-columns: 1fr;
@@ -248,5 +252,12 @@
 
   .resume-photo{
     display: none;
+  }
+}
+
+@media (max-width:640px){
+  .about{
+    flex-direction: column;
+    gap: 3.2rem;
   }
 }

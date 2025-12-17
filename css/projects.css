@@ -1,7 +1,7 @@
 .projects{
   flex-direction: column;
   min-height: auto !important;
-  gap: 5.6rem;
+  gap: 6.4rem;
 }
 
 .projects-card-container{
@@ -145,6 +145,15 @@
 
 
 @media (max-width:640px){
+
+  .projects-card-container{
+    grid-template-rows: 1fr;
+  }
+ 
+  .projects{
+    gap: 3.2rem;
+  }
+
   .card-item{
     gap: 2.4rem;
     border-radius: 2.4rem;
