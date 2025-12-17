@@ -77,12 +77,14 @@
   color: var(--neutral-01);
   font-family: var(--outfit);
   font-weight: 700;
+  height: 5.6rem;
   background-color: transparent;
   cursor: pointer;
   transition: all .5s;
   font-size: 1.6rem;
   margin-top: 2.4rem;
   transition: transform .2s cubic-bezier(.55, .085, .68, .53);
+  border-radius: 5.6rem;
 }
 
 .contact button:hover {
