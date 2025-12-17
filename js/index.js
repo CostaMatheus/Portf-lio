@@ -46,7 +46,7 @@ window.addEventListener("touchmove", onScroll, { passive: true });
 
 
 // ======================================================
-// SCROLL SUAVE — TOPO CORRETO DA SEÇÃO
+// SCROLL SUAVE
 // ======================================================
 function smoothScroll(e) {
   e.preventDefault();
@@ -55,7 +55,6 @@ function smoothScroll(e) {
   const target = document.querySelector(targetId);
   if (!target) return;
 
-  // garante header visível antes do cálculo
   header.classList.remove("hide");
   header.classList.add("show");
 
@@ -70,7 +69,6 @@ function smoothScroll(e) {
     behavior: "smooth"
   });
 
-  // fecha menu mobile
   linksContainer?.classList.remove("active");
   menuHamburger?.classList.remove("active");
 }
@@ -81,7 +79,7 @@ menuLinks.forEach(link =>
 
 
 // ======================================================
-// MENU ATIVO — INTERSECTION OBSERVER (ROBUSTO)
+// MENU ATIVO — INTERSECTION OBSERVER
 // ======================================================
 const menuObserver = new IntersectionObserver(
   entries => {
@@ -95,15 +93,13 @@ const menuObserver = new IntersectionObserver(
         link.classList.remove("actived")
       );
 
-      const activeLink = document.querySelector(
-        `.js-link[href="#${id}"]`
-      );
-
-      activeLink?.classList.add("actived");
+      document
+        .querySelector(`.js-link[href="#${id}"]`)
+        ?.classList.add("actived");
     });
   },
   {
-    rootMargin: "-35% 0px -45% 0px",
+    rootMargin: "-40% 0px -40% 0px",
     threshold: 0
   }
 );
@@ -114,7 +110,7 @@ sections.forEach(section =>
 
 
 // ======================================================
-// ANIMAÇÃO DE SEÇÕES (SEGURA E COMPATÍVEL COM SEU CSS)
+// ANIMAÇÃO — ENTRA E SAI (IDA E VOLTA)
 // ======================================================
 const animationObserver = new IntersectionObserver(
   entries => {
@@ -122,24 +118,21 @@ const animationObserver = new IntersectionObserver(
       if (entry.isIntersecting) {
         entry.target.classList.add("visible");
         entry.target.classList.remove("hidden");
-        animationObserver.unobserve(entry.target);
+      } else {
+        entry.target.classList.remove("visible");
+        entry.target.classList.add("hidden");
       }
     });
   },
   {
-    threshold: 0,
-    rootMargin: "0px 0px -15% 0px"
+    threshold: 0.15,
+    rootMargin: "0px 0px -10% 0px"
   }
 );
 
+// todas começam ocultas
 sections.forEach(section => {
-  // About SEMPRE visível
-  if (section.id === "about") {
-    section.classList.add("visible");
-  } else {
-    section.classList.add("hidden");
-  }
-
+  section.classList.add("hidden");
   animationObserver.observe(section);
 });
 
