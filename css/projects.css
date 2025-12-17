@@ -134,7 +134,12 @@
     grid-template-columns: 1fr;
   }
 
+  .card-item.hidden{
+    display: none;
+  }
+
   .card-item{
+    display: flex;
     gap: 1.6rem;
     border-radius: 2.4rem;
     min-height: auto;
