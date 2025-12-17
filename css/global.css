@@ -187,6 +187,7 @@ img {
   animation-name: fadeInUp;
     opacity: 1;
     pointer-events: auto;
+    transform: translateY(0);
 }
 
 /* Quando sai → some instantaneamente */
