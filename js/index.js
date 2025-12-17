@@ -53,7 +53,7 @@ function smoothScroll(e) {
   const target = document.querySelector(targetId);
   if (!target) return;
 
-  // força header visível antes do cálculo
+  // garante header visível antes do cálculo
   header.classList.remove("hide");
   header.classList.add("show");
 
@@ -73,22 +73,25 @@ function smoothScroll(e) {
   if (menuHamburger) menuHamburger.classList.remove("active");
 }
 
-menuLinks.forEach(link => {
-  link.addEventListener("click", smoothScroll);
-});
+menuLinks.forEach(link =>
+  link.addEventListener("click", smoothScroll)
+);
 
 
 // ======================================================
-// MENU ATIVO — INTERSECTION OBSERVER (FIX ABOUT)
+// MENU ATIVO — INTERSECTION OBSERVER
+// (corrige About e sections pequenas)
 // ======================================================
-const sectionObserver = new IntersectionObserver(
+const menuObserver = new IntersectionObserver(
   entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
 
       const id = entry.target.getAttribute("id");
 
-      menuLinks.forEach(link => link.classList.remove("actived"));
+      menuLinks.forEach(link =>
+        link.classList.remove("actived")
+      );
 
       const activeLink = document.querySelector(
         `.js-link[href="#${id}"]`
@@ -98,12 +101,42 @@ const sectionObserver = new IntersectionObserver(
     });
   },
   {
-    rootMargin: "-30% 0px -50% 0px",
+    rootMargin: "-35% 0px -50% 0px",
     threshold: 0,
   }
 );
 
-sections.forEach(section => sectionObserver.observe(section));
+sections.forEach(section =>
+  menuObserver.observe(section)
+);
+
+
+// ======================================================
+// ANIMAÇÃO DE SEÇÕES (SEGURA)
+// ======================================================
+const animationObserver = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        entry.target.classList.remove("hidden");
+        animationObserver.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    threshold: 0.01,
+    rootMargin: "0px 0px -10% 0px",
+  }
+);
+
+sections.forEach(section => {
+  // NÃO esconder About
+  if (section.id !== "about") {
+    section.classList.add("hidden");
+  }
+  animationObserver.observe(section);
+});
 
 
 // ======================================================
@@ -119,29 +152,6 @@ if (menuHamburger) {
 window.addEventListener("scroll", () => {
   if (linksContainer) linksContainer.classList.remove("active");
   if (menuHamburger) menuHamburger.classList.remove("active");
-});
-
-
-// ======================================================
-// ANIMAÇÃO DE SEÇÕES (DESKTOP + MOBILE)
-// ======================================================
-const animationObserver = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        entry.target.classList.remove("hidden");
-      }
-    });
-  },
-  {
-    threshold: 0.25,
-  }
-);
-
-sections.forEach(section => {
-  section.classList.add("hidden");
-  animationObserver.observe(section);
 });
 
 
