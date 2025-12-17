@@ -273,20 +273,7 @@ img {
    
   }
 
-  .section {
-    min-height: calc(100vh - 96px);
-    animation: none;
-  }
 
-  
-
-  .section.hidden {
-      opacity: 1;
-  }
-  .section.visible {
-      opacity: 1;
-      animation: none;
-  }
 
   .container{
     max-width: 768px;
