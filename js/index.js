@@ -154,30 +154,52 @@ window.addEventListener("scroll", () => {
 });
 
 // ======================================================
-// VER MAIS — PROJECTS (SEM FLICKER)
+// VER MAIS — PROJECTS (3 FIXOS + RESTANTE TOGGLE)
 // ======================================================
 document.addEventListener("DOMContentLoaded", () => {
   const btn = document.getElementById("toggle-projects-btn");
   const cards = document.querySelectorAll(".card-item");
 
-  if (!btn || !cards.length) return;
+  if (!btn || cards.length <= 3) return;
+
+  const ALWAYS_VISIBLE = 3;
+  const extraCards = Array.from(cards).slice(ALWAYS_VISIBLE);
 
   let expanded = false;
+
+  // estado inicial
+  cards.forEach((card, index) => {
+    if (index < ALWAYS_VISIBLE) {
+      card.classList.add("visible");
+      card.classList.remove("hidden");
+    } else {
+      card.classList.add("hidden");
+      card.classList.remove("visible");
+    }
+  });
 
   btn.addEventListener("click", e => {
     e.preventDefault();
     expanded = !expanded;
 
-    cards.forEach((card, i) => {
-      if (expanded) {
+    if (expanded) {
+      // MOSTRA extras
+      extraCards.forEach((card, i) => {
         card.classList.remove("hidden");
-        setTimeout(() => card.classList.add("visible"), i * 60);
-      } else {
+        setTimeout(() => {
+          card.classList.add("visible");
+        }, i * 80);
+      });
+      btn.textContent = "Ver menos";
+    } else {
+      // ESCONDE somente extras
+      extraCards.forEach(card => {
         card.classList.remove("visible");
-        setTimeout(() => card.classList.add("hidden"), 300);
-      }
-    });
-
-    btn.textContent = expanded ? "Ver menos" : "Ver mais";
+        setTimeout(() => {
+          card.classList.add("hidden");
+        }, 300);
+      });
+      btn.textContent = "Ver mais";
+    }
   });
 });
