@@ -46,70 +46,46 @@ window.addEventListener("touchmove", onScroll, { passive: true });
 // ======================================================
 function smoothScroll(e) {
   e.preventDefault();
-
-  const target = document.querySelector(
-    e.currentTarget.getAttribute("href")
-  );
+  const target = document.querySelector(e.currentTarget.getAttribute("href"));
   if (!target) return;
 
-  // força header visível antes do cálculo
   header.classList.remove("hide");
   header.classList.add("show");
 
   const headerHeight = header.offsetHeight;
   const targetY =
-    target.getBoundingClientRect().top +
-    window.scrollY -
-    headerHeight;
+    target.getBoundingClientRect().top + window.scrollY - headerHeight;
 
   window.scrollTo({
     top: targetY,
     behavior: "smooth"
   });
 
-  // fecha menu mobile
   linksContainer?.classList.remove("active");
   menuHamburger?.classList.remove("active");
 }
 
-menuLinks.forEach(link =>
-  link.addEventListener("click", smoothScroll)
-);
+menuLinks.forEach(link => link.addEventListener("click", smoothScroll));
 
 // ======================================================
-// MENU ATIVO — INTERSECTION OBSERVER (ROBUSTO)
+// MENU ATIVO — INTERSECTION OBSERVER
 // ======================================================
 const menuObserver = new IntersectionObserver(
   entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-
       const id = entry.target.id;
-
-      menuLinks.forEach(link =>
-        link.classList.remove("actived")
-      );
-
-      const active = document.querySelector(
-        `.js-link[href="#${id}"]`
-      );
-
+      menuLinks.forEach(link => link.classList.remove("actived"));
+      const active = document.querySelector(`.js-link[href="#${id}"]`);
       active?.classList.add("actived");
     });
   },
-  {
-    threshold: 0,
-    rootMargin: "-35% 0px -50% 0px"
-  }
+  { threshold: 0, rootMargin: "-35% 0px -50% 0px" }
 );
-
-sections.forEach(section =>
-  menuObserver.observe(section)
-);
+sections.forEach(section => menuObserver.observe(section));
 
 // ======================================================
 // ANIMAÇÃO DAS SEÇÕES (IDA + VOLTA)
-// projects NÃO volta para hidden
 // ======================================================
 const animationObserver = new IntersectionObserver(
   entries => {
@@ -128,13 +104,9 @@ const animationObserver = new IntersectionObserver(
       }
     });
   },
-  {
-    threshold: 0.15,
-    rootMargin: "0px 0px -10% 0px"
-  }
+  { threshold: 0.15, rootMargin: "0px 0px -10% 0px" }
 );
 
-// estado inicial
 sections.forEach(section => {
   section.classList.add("hidden");
   animationObserver.observe(section);
@@ -145,7 +117,7 @@ sections.forEach(section => {
 // ======================================================
 menuHamburger?.addEventListener("click", () => {
   linksContainer?.classList.toggle("active");
-  menuHamburger.classList.toggle("active");
+  menuHamburger?.classList.toggle("active");
 });
 
 window.addEventListener("scroll", () => {
@@ -153,53 +125,109 @@ window.addEventListener("scroll", () => {
   menuHamburger?.classList.remove("active");
 });
 
+
 // ======================================================
 // VER MAIS — PROJECTS (3 FIXOS + RESTANTE TOGGLE)
 // ======================================================
 document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("toggle-projects-btn");
-  const cards = document.querySelectorAll(".card-item");
-
-  if (!btn || cards.length <= 3) return;
-
+  const btn = document.querySelector(".projects-btn");
+  const cards = Array.from(document.querySelectorAll(".card-item"));
+  const notification = document.querySelector(".notification");
   const ALWAYS_VISIBLE = 3;
-  const extraCards = Array.from(cards).slice(ALWAYS_VISIBLE);
+  let expandedCount = 0;
 
-  let expanded = false;
+  function updateCardsVisibility() {
+    const visibleCards = cards.filter(card => !card.classList.contains('hidden-by-tab'));
+    const totalVisible = visibleCards.length;
+
+    visibleCards.forEach((card, index) => {
+      if (index < ALWAYS_VISIBLE + expandedCount) {
+        card.classList.add('visible');
+        card.classList.remove('hidden', 'is-removed');
+      } else {
+        card.classList.remove('visible');
+        card.classList.add('hidden');
+        setTimeout(() => {
+          if (card.classList.contains('hidden')) card.classList.add('is-removed');
+        }, 300);
+      }
+    });
+
+    // botão sempre visível
+    if (totalVisible <= ALWAYS_VISIBLE) {
+      btn.textContent = "Ver mais"; // mantém o texto padrão
+    }
+  }
+
+  // Função para mostrar notificação
+
+  function showNotification(message, duration = 1000) {
+    notification.textContent = message;
+    notification.classList.add('show');
+
+    setTimeout(() => {
+      notification.classList.remove('show');
+    }, duration);
+  }
+
+ btn.addEventListener("click", e => {
+  e.preventDefault();
+  const visibleCards = cards.filter(card => !card.classList.contains('hidden-by-tab'));
+  const totalVisible = visibleCards.length;
+
+  if (expandedCount + ALWAYS_VISIBLE >= totalVisible) {
+    // "Ver menos"
+    if (totalVisible > ALWAYS_VISIBLE) {
+      expandedCount = 0;
+      btn.textContent = "Ver mais";
+      updateCardsVisibility();
+    } else {
+      // 🔔 Popup via CSS
+      showNotification("Não existem mais projetos para serem exibidos.");
+      return;
+    }
+  } else {
+    // "Ver mais" 3 a 3
+    expandedCount += 3;
+    if (expandedCount + ALWAYS_VISIBLE > totalVisible) expandedCount = totalVisible - ALWAYS_VISIBLE;
+    btn.textContent = "Ver menos";
+    updateCardsVisibility();
+  }
+});
 
   // estado inicial
-  cards.forEach((card, index) => {
-    if (index < ALWAYS_VISIBLE) {
-      card.classList.add("visible");
-      card.classList.remove("hidden");
-    } else {
-      card.classList.add("hidden");
-      card.classList.remove("visible");
-    }
-  });
+  cards.forEach(card => card.classList.add('hidden', 'is-removed'));
+  updateCardsVisibility();
 
-  btn.addEventListener("click", e => {
-    e.preventDefault();
-    expanded = !expanded;
+  // ======================================================
+  // TAB PROJECTS — FILTRO MULTI-CATEGORIA
+  // ======================================================
+  const tabs = document.querySelectorAll('.tab-nav-projects a');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', e => {
+      e.preventDefault();
+      const filter = tab.dataset.filter;
+      const isActive = tab.classList.contains('active');
 
-    if (expanded) {
-      // MOSTRA extras
-      extraCards.forEach((card, i) => {
-        card.classList.remove("hidden");
-        setTimeout(() => {
-          card.classList.add("visible");
-        }, i * 80);
+      tabs.forEach(t => t.classList.remove('active'));
+      if (!isActive) tab.classList.add('active');
+
+      cards.forEach(card => {
+        const categories = card.dataset.category?.split(' ') || [];
+        if (isActive || (!filter || categories.includes(filter))) {
+          card.classList.remove('hidden-by-tab');
+        } else {
+          card.classList.add('hidden-by-tab');
+          card.classList.remove('visible');
+          setTimeout(() => {
+            if (card.classList.contains('hidden-by-tab')) card.classList.add('is-removed');
+          }, 300);
+        }
       });
-      btn.textContent = "Ver menos";
-    } else {
-      // ESCONDE somente extras
-      extraCards.forEach(card => {
-        card.classList.remove("visible");
-        setTimeout(() => {
-          card.classList.add("hidden");
-        }, 300);
-      });
-      btn.textContent = "Ver mais";
-    }
+
+      expandedCount = 0; // reset da contagem
+      btn.textContent = "Ver mais"; // mantém botão visível
+      updateCardsVisibility();
+    });
   });
 });
