@@ -366,13 +366,6 @@
     }
 }
 
-@media (max-width: 480px) {
-    /* Opcional: Reduz o tamanho do título para caber na tela */
-    .hero-content h1 {
-        font-size: 4.8rem; /* Ajuste o tamanho da fonte para mobile */
-        line-height: 4.8rem;
-    }
-}
 
 @media (max-width: 480px) {
     /* Opcional: Reduz o tamanho do título para caber na tela */
