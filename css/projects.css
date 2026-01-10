@@ -5,6 +5,90 @@
   pointer-events: auto;
 }
 
+.projects-content{
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+  align-items: center;
+}
+
+.tab-nav-projects{
+  display: flex;
+  gap: 1.6rem;
+}
+
+.tab-nav-projects li{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tab-nav-projects li a{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: var(--zillab);
+  padding: 0.8rem 1.6rem;
+  height: 40px;
+  font-size: 1.6rem;
+  
+  transition: ease .3s;
+  
+  border: 1px solid transparent;
+
+  border-radius: 2.0rem;
+  background-color: var(--neutral-07);
+
+  &:hover{
+    transform: scale(1.08);
+  }
+}
+
+.tab-nav-projects li a.ui-design{
+  background: var(--Neutral-02, #343438);
+  box-shadow: -2px -2px 8px rgba(130, 27, 252, 0.4);
+
+  background-image:
+  linear-gradient(#343438, #343438),
+  linear-gradient(135deg, #821BFC, transparent 60%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.tab-nav-projects li a.ux-design{
+  background: var(--Neutral-02, #343438);
+  box-shadow: -2px -2px 8px rgba(255, 0, 200, 0.3);
+
+  background-image:
+  linear-gradient(#343438, #343438),
+  linear-gradient(135deg, #ff00c8, transparent 60%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.tab-nav-projects li a.branding{
+  background: var(--Neutral-02, #343438);
+  box-shadow: -2px -2px 8px rgba(0, 212, 232, 0.4);
+
+  background-image:
+  linear-gradient(#343438, #343438),
+  linear-gradient(135deg, #00d5e8, transparent 60%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.tab-nav-projects li a.front-end{
+  background: var(--Neutral-02, #343438);
+  box-shadow: -2px -2px 8px rgba(206, 231, 39, 0.4);
+
+  background-image:
+  linear-gradient(#343438, #343438),
+  linear-gradient(135deg, #cee727, transparent 60%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
 .projects-card-container{
   display: grid;
   width: 100%;
