@@ -369,7 +369,9 @@
   .tab-nav-projects{
     gap: 1.6rem;
     justify-content: flex-start;
+    padding-inline: 0;
   }
+  
 }
 
 
