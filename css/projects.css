@@ -19,6 +19,7 @@
   gap: 1.6rem;
   padding: 1.6rem;
   justify-content: center;
+  overflow-x: auto;
   width: 100%;
   -webkit-overflow-scrolling: touch; /* scroll suave no iOS */
   scrollbar-width: none;     /* esconde scrollbar no Firefox */
