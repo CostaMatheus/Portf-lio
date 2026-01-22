@@ -231,3 +231,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+
+
+
+const tags = document.querySelectorAll('.hero-tag-animation');
+let index = 0;
+
+// garante que o primeiro apareça
+tags[index].classList.add('show');
+
+setInterval(() => {
+  tags[index].classList.remove('show');
+  tags[index].classList.add('hide');
+
+  setTimeout(() => {
+    tags[index].classList.remove('hide');
+
+    index = (index + 1) % tags.length;
+
+    tags[index].classList.add('show');
+  }, 600); // tempo da transição CSS
+}, 2500);  // tempo entre as palavras

@@ -11,15 +11,89 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  max-width: 1280px;
+  max-width: 1440px;
   gap: 1.6rem;
 }
 
 .hero-content h1{
+  position: relative;
   font-size: 17.6rem;
   line-height: 17.6rem;
   font-weight: 700;
   text-align: center;
+}
+
+.hero-title {
+  line-height: 1.1;
+}
+
+.hero-tag {
+  position: relative;
+  display: inline-block;
+  vertical-align: baseline;
+  width: 100%;
+}
+
+.hero-tag-placeholder{
+  visibility: hidden;
+  white-space: nowrap;
+}
+
+/* todas ocupam o mesmo espaço */
+.hero-tag-animation {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  text-align: center;
+  opacity: 0;
+  white-space: nowrap;
+  animation: heroFade 12.5s infinite;
+}
+
+/* delays sequenciais */
+.hero-tag-animation:nth-child(1) { animation-delay: 0s; }
+.hero-tag-animation:nth-child(2) { animation-delay: 2.5s; }
+.hero-tag-animation:nth-child(3) { animation-delay: 5s; }
+.hero-tag-animation:nth-child(4) { animation-delay: 7.5s; }
+.hero-tag-animation:nth-child(5) { animation-delay: 10s; }
+
+@keyframes heroFade {
+  0% {
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 1;
+  }
+  28% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+.hero-tag-animation.product-designer {
+  color: var(--primary-01);
+}
+
+.hero-tag-animation.ui-designer {
+  color: #811aff;
+}
+
+.hero-tag-animation.ux-designer {
+  color: var(--quaternary-01)
+}
+
+.hero-tag-animation.brand-designer {
+  color: var(--secondary-01);
+}
+
+.hero-tag-animation.web-designer {
+  color: var(--tertiary-01);
 }
 
 .introduction {
@@ -57,14 +131,14 @@
 /* Posicionamento das Tags */
 .floating-item.ui-design {
   /* Posição no lado esquerdo superior */
-  top: 35%;
-  left: 10%; 
+  top: 40%;
+  left: 5%; 
 }
 
 .floating-item.ux-design {
   /* Posição no lado direito superior */
   top: 35%;
-  right: 8%; 
+  right: 14%; 
 }
 
 .floating-item.branding {
@@ -75,7 +149,7 @@
 
 .floating-item.developing {
   /* Posição no lado direito inferior */
-  top: 88%;
+  top: 92%;
   right: 15%; 
 }
 
@@ -83,17 +157,17 @@
 /* Exemplo com cores para referência */
 .icon-float.icon-pink { 
   top: 0; 
-  left: 15%; 
+  left: 18%; 
 }
 
 .icon-float.icon-blue{
-  top: 50%;
-  left: 23%; 
+  top: 40%;
+  left: 21%; 
 }
 
 .icon-float.icon-red{
   top: 40%;
-  right: 24%;
+  right: 5%;
 }
 
 .hero-btn{
@@ -108,12 +182,12 @@
 
 .icon-float.icon-purple{
   bottom: -2.5%;
-  right: 5%; 
+  right: 0%; 
 }
 
 .icon-float.icon-orange{
   top: -5%;
-  right: 25%;
+  right: 20%;
 }
 /* Repita para .icon-blue, .icon-red, .icon-yellow, .icon-purple ajustando top/left/right/bottom */
 
