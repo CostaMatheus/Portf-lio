@@ -17,10 +17,26 @@
 
 .hero-content h1{
   position: relative;
-  font-size: 17.6rem;
-  line-height: 17.6rem;
+  font-size: 12.8rem;
+  line-height: 13.6rem;
   font-weight: 700;
   text-align: center;
+  
+}
+
+.hero-content p{
+  color: var(--neutral-04);
+  text-align: center;
+  font-family: var(--outfit);
+  font-size: 3.6rem;
+  line-height: 4.0rem;
+  font-weight: 300;
+  max-width: 800px;
+}
+
+.button-group{
+  display: flex;
+  gap: 1.6rem;
 }
 
 .hero-title {
@@ -29,8 +45,9 @@
 
 .hero-tag {
   position: relative;
-  display: inline-block;
+  display: flex;
   vertical-align: baseline;
+  justify-content: center;
   width: 100%;
 }
 
@@ -106,21 +123,37 @@
 /* Estilo para a caixa da tag (ex: UI Design) */
 .floating-item {
   position: absolute;
-  padding: 0.8rem 2.0rem;
-  border: 2px solid var(--neutral-01);
-  border-radius: 4.8rem;
   white-space: nowrap; /* Impede a quebra de linha */
   z-index: 10; /* Garante que fique acima do texto */
-  background-color: transparent; /* Ou a cor do seu fundo */
-  height: 5.0rem;
+  display: block;
 }
 
-.floating-item .tag {
-  font-size: 2.4rem;
-  font-family: var(--outfit);
-  color: var(--neutral-01);
-  font-weight: 300;
+
+/* Posicionamento das Tags */
+.floating-item.branding {
+  /* Posição no lado esquerdo superior */
+  top: 20%;
+  left: 27%; 
 }
+
+.floating-item.marketing {
+  /* Posição no lado direito superior */
+  top: 52%;
+  right: 20%; 
+}
+
+.floating-item.coding {
+  /* Posição no lado esquerdo inferior */
+  bottom: 17%;
+  left: 22%; 
+}
+
+.floating-item.design {
+  /* Posição no lado esquerdo inferior */
+  bottom: 15%;
+  right: 22%; 
+}
+
 
 /* Estilo para os ícones coloridos flutuantes */
 .icon-float {
@@ -128,44 +161,39 @@
   z-index: 5;
 }
 
-/* Posicionamento das Tags */
-.floating-item.ui-design {
-  /* Posição no lado esquerdo superior */
-  top: 40%;
-  left: 5%; 
+/* Posicionamento dos Ícones Flutuantes */
+.icon-float.icon-red{
+  top: -20%;
+  left: 15%;
 }
 
-.floating-item.ux-design {
-  /* Posição no lado direito superior */
-  top: 35%;
-  right: 14%; 
-}
-
-.floating-item.branding {
-  /* Posição no lado esquerdo inferior */
-  top: 88%;
-  left: 15%; 
-}
-
-.floating-item.developing {
-  /* Posição no lado direito inferior */
-  top: 92%;
-  right: 15%; 
-}
-
-/* Posicionamento dos Ícones Flutuantes (Círculos Coloridos) */
-/* Exemplo com cores para referência */
 .icon-float.icon-pink { 
-  top: 0; 
-  left: 18%; 
+  bottom: 15%; 
+  right: 12%; 
 }
 
 .icon-float.icon-blue{
-  top: 40%;
-  left: 21%; 
+  top: 65%;
+  left: 12%; 
 }
 
-.icon-float.icon-red{
+
+.icon-float.icon-yellow{
+  right: -32px; 
+  bottom: -32px;
+}
+
+.icon-float.icon-purple{
+  top: 35%;
+  left: 3%;
+}
+
+.icon-float.icon-orange{
+  top: -10%;
+  right: 20%;
+}
+
+.icon-float.icon-lemon{
   top: 40%;
   right: 5%;
 }
@@ -175,21 +203,6 @@
   font-size: 2.4rem;
 }
 
-.icon-float.icon-yellow{
-  right: -32px; 
-  bottom: -32px;
-}
-
-.icon-float.icon-purple{
-  bottom: -2.5%;
-  right: 0%; 
-}
-
-.icon-float.icon-orange{
-  top: -5%;
-  right: 20%;
-}
-/* Repita para .icon-blue, .icon-red, .icon-yellow, .icon-purple ajustando top/left/right/bottom */
 
 @media (max-width: 1400px) {
   .hero-content h1{
@@ -197,59 +210,8 @@
     line-height: 14.4rem;
   }
 
-  .floating-item.ui-design {
-  /* Posição no lado esquerdo superior */
-  top: 37%;
-  left: 10%; 
-  }
 
-  .floating-item.ux-design {
-    /* Posição no lado direito superior */
-    top: 48%;
-    right: 5%; 
-  }
-
-  .floating-item.branding {
-    /* Posição no lado esquerdo inferior */
-    bottom: -15%;
-    left: 20%; 
-  }
-
-  .floating-item.developing {
-    /* Posição no lado direito inferior */
-    bottom: -15%;
-    right: 20%; 
-  }
-
-  .icon-float.icon-pink { 
-    top: 0; 
-    left: 15%; 
-  }
-
-  .icon-float.icon-blue{
-     top: 50%;
-    left: 20%; 
-  }
-
-  .icon-float.icon-red{
-    top: 35%;
-    right: 20%;
-  }
-
-  .icon-float.icon-yellow{
-    bottom: -15%;
-    left: 42%; 
-  }
-
-  .icon-float.icon-purple{
-    bottom: -2.5%;
-    right:5%; 
-  }
-
-  .icon-float.icon-yellow{
-    bottom: -67.5%;
-    left: 80%; 
-  }
+  
 }
 
 @media (max-width: 1280px) {
@@ -258,115 +220,13 @@
     line-height: 11.2rem;
   }
 
-  .floating-item.ui-design {
-  /* Posição no lado esquerdo superior */
-  top: 37%;
-  bottom: auto;
-  left: 7%; 
-  }
-
-  .floating-item.ux-design {
-    /* Posição no lado direito superior */
-    top: 37%;
-    right: 5%; 
-    bottom: auto;
-    left: auto;
-  }
-
-  .floating-item.branding {
-    /* Posição no lado esquerdo inferior */
-    bottom: -25%;
-    left: 14%; 
-  }
-
-  .floating-item.developing {
-    /* Posição no lado direito inferior */
-    bottom: -33%;
-    right: auto; 
-    left: 67.8%;
-  }
-
-  .icon-float.icon-pink { 
-    top: -10%; 
-    left: 15%; 
-  }
-
-  .icon-float.icon-blue{
-    top: auto;
-    bottom: -5%;
-    left: 5%;
-    display: none;
-  }
-
-  .icon-float.icon-red{
-    top: 40%;
-    right: 17%;
-    display: none;
-  }
-
-  .icon-float.icon-yellow{
-    bottom: -75%;
-    left: 80%; 
-  }
-
-  .icon-float.icon-purple{
-    bottom: -15.5%;
-    right: 0%; 
-  }
-
+  
 }
 
 @media (max-width: 992px) {
 
 
-  .floating-item.ux-design {
-    /* Posição no lado direito superior */
-    top: 35%;
-    right: 6%; 
-    bottom: auto;
-    left: auto;
-  }
-
-  .floating-item.branding {
-    /* Posição no lado esquerdo inferior */
-    bottom: -25%;
-    left: 11%; 
-  }
-
-  .floating-item.developing {
-    /* Posição no lado direito inferior */
-    bottom: -33%;
-    right: auto; 
-    left: 70%;
-  }
-
-  .icon-float.icon-pink { 
-    top: -10%; 
-    left: 15%; 
-  }
-
-  .icon-float.icon-blue{
-    top: auto;
-    bottom: -25%;
-    left: 5%; 
-  }
-
-  .icon-float.icon-red{
-    top: 38%;
-    right: 20%;
-  }
-
-  .icon-float.icon-yellow{
-    bottom: -75%;
-    left: 85%; 
-  }
-
-  .icon-float.icon-purple{
-    bottom: -15.5%;
-    right: 0%; 
-    display: none;
-  }
-
+ 
 }
 
 @media (max-width: 960px) {
@@ -395,35 +255,6 @@
     margin: 0 auto;
   }
 
-  .floating-item{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    position: static;
-    width: 148px;
-  }
-
-  .floating-item.ux-design {
-    /* Posição no lado direito superior */
-    top: 45%;
-    right: 6%; 
-    bottom: auto;
-    left: auto;
-  }
-
-  .floating-item.branding {
-    /* Posição no lado esquerdo inferior */
-    bottom: -25%;
-    left: 21%; 
-  }
-
-  .floating-item.developing {
-    /* Posição no lado direito inferior */
-    bottom: -33%;
-    right: auto; 
-    left: 55.8%;
-  }
 
   .icon-float{
     display: none;
@@ -446,10 +277,6 @@
     .hero-content h1 {
         font-size: 4.0rem; /* Ajuste o tamanho da fonte para mobile */
         line-height: 4.8rem;
-    }
-
-    .floating-item .tag{
-      font-size: 1.8rem;
     }
 }
 
