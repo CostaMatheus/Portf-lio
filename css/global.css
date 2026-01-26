@@ -47,8 +47,8 @@
   width: 80vw;
   height: 80vh;
   border-radius: 50%;
-  filter: blur(180px);
-  opacity: 0.5;
+  filter: blur(250px);
+  opacity: 0.3;
 }
 
 .elipse-primary {
@@ -380,15 +380,40 @@ img {
     max-width: 100%;
   }
 
+  .primary-button {
+    padding: 1.6rem 1.6rem;
+    height: 48px;
+    text-align: center;
+    border-radius: 24px;
+    font-weight: 400;
+    cursor: pointer;
+  }
+
+
+.btn-link{
+  padding: 1.6rem 1.6rem;
+  height: 48px;
+  text-align: center;
+  border-radius: 24px;
+  font-weight: 400;
+}
+
+.btn-link:hover{
+  font-size: 1.8rem;
+  padding: 1.8rem;
+}
+
   
 }
 
+
+
 @media (max-width:480px){
   h1 {
-  font-size: 4.0rem;
-  font-weight: 600;
-  line-height: 8.0rem;
-}
+    font-size: 4.0rem;
+    font-weight: 600;
+    line-height: 8.0rem;
+  }
 
 
 }
