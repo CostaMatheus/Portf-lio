@@ -21,13 +21,14 @@
 </head>
 
 <body>
-  <div id="fullpage">
-    <elipse></elipse>
-    <elipse></elipse>
-    <elipse></elipse>
-    <elipse></elipse>
-    <elipse></elipse>
+  <div class="global-ellipses">
+    <div class="elipse elipse-primary"></div>
+    <div class="elipse elipse-secondary"></div>
+    <div class="elipse elipse-tertiary"></div>
+    <div class="elipse elipse-quaternary"></div>
+  </div>
 
+  <div id="fullpage">
     <header class="navbar-header">
       <nav class="navbar container">
           <ul class="menu mobile">
@@ -72,6 +73,15 @@
     
     
     <section id="hero" class="section hero">
+      <div class="space">
+        <div class="planet"></div>
+
+        <div class="orbit">
+          <div class="satelite"></div>
+        </div>
+      </div>
+
+
       <div class="hero-content">
         <h1>Olá!, Sou o matheus, um 
           <span class="hero-tag">
@@ -151,6 +161,7 @@
     </section>
 
     <section id="projects" class="section container projects">
+    
       <h1>Projetos</h1>
 
       <div class="projects-content">
@@ -286,6 +297,8 @@
     </section>
 
     <section id="about" class="section container about">
+   
+
       <h1>Sobre mim</h1>
 
       <div class="resume-container">
@@ -502,42 +515,6 @@
       
     </section>
 
-    <!-- <nav id="tab_bar_nav" class="tab-bar-nav">
-      <ul>
-        <li>
-          <a>
-            <img src="assets/svg/icons/Star Purple.svg" alt="" srcset="">
-            <span>UI Design</span>
-          </a>
-        </li>
-        <li>
-          <a>
-            <img src="assets/svg/icons/Star Pink.svg" alt="" srcset="">
-            <span>UX Design</span>
-          </a>
-        </li>
-        <li>
-          <a>
-            <img src="assets/svg/icons/Star Cyan.svg" alt="" srcset="">
-            <span>Branding</span>
-          </a>
-        </li>
-        <li>
-          <a>
-            <img src="assets/svg/icons/Star Lemon.svg" alt="" srcset="">
-            <span>Developing</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-
-    <div class="scroll-dots">
-      <a href="#projects" class="dot js-dot" data-target="projects"></a>
-      <a href="#about" class="dot js-dot" data-target="about"></a>
-      <a href="#contact" class="dot js-dot" data-target="contact"></a>
-    </div>
-    -->
-
    <section id="contact" class="section container contact">
       <div class="contact-container">
         <div class="contact-content">
@@ -661,8 +638,12 @@
     <footer class="brand">
       <p>Conteúdo produzido por: <a href="https://www.themasu.com/">Themasu </a> &copy; 2024</p>
     </footer>
+
+    
+
   </div>
 
+  
   <script src="js/index.js"></script>
 
 </body>

@@ -1,4 +1,89 @@
 
+/* CONTAINER */
+.space {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: 100vh;
+  max-height: 100vh;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+}
+
+/* =====================
+   PLANETA
+===================== */
+.planet {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: 400px;
+ 
+  max-height: 400px;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  filter: blur(250px);
+  background: var(--color); /* lemon base */
+
+  animation:
+    planetPulse 4s ease-in-out infinite,
+    colorFade 12.5s linear infinite;
+}
+
+/* =====================
+   ÓRBITA
+===================== */
+.orbit {
+  position: absolute;
+  inset: 0;
+  animation: orbit 40s linear infinite;
+}
+
+/* =====================
+   SATÉLITE
+===================== */
+.satelite {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 0;
+  animation: pendulum 4s ease-in-out infinite alternate;
+}
+
+/* BOLAS */
+.satelite::before,
+.satelite::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 5%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(25px);
+
+  animation:
+    slide 4s ease-in-out infinite alternate,
+    colorFade 12.5s linear infinite;
+}
+
+/* BOLA MENOR */
+.satelite::before {
+  width: 40px;
+  height: 40px;
+}
+
+/* BOLA MAIOR */
+.satelite::after {
+  width: 80px;
+  height: 80px;
+  animation-direction: alternate-reverse, normal;
+}
+
+
 .hero{
   align-items: center;
   justify-content: center;
@@ -73,24 +158,6 @@
 .hero-tag-animation:nth-child(3) { animation-delay: 5s; }
 .hero-tag-animation:nth-child(4) { animation-delay: 7.5s; }
 .hero-tag-animation:nth-child(5) { animation-delay: 10s; }
-
-@keyframes heroFade {
-  0% {
-    opacity: 0;
-  }
-  8% {
-    opacity: 1;
-  }
-  20% {
-    opacity: 1;
-  }
-  28% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
-}
 
 
 .hero-tag-animation.product-designer {

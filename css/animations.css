@@ -39,3 +39,77 @@
   85%  { transform: translateY(-400%); }
   100% { transform: translateY(-400%); }
 }
+
+
+
+/* =====================
+   ANIMAÇÕES DE MOVIMENTO
+===================== */
+@keyframes orbit {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pendulum {
+  from { transform: rotate(-25deg); }
+  to   { transform: rotate(25deg); }
+}
+
+@keyframes slide {
+  from { left: 5%; }
+  to   { left: 95%; }
+}
+
+@keyframes planetPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+}
+
+/* =====================
+   ANIMAÇÃO DE COR (FADE REAL)
+===================== */
+
+@keyframes colorFade {
+  0% {
+    background-color: var(--tertiary-01);
+  }
+  20% {
+    background-color: var(--primary-01);
+  }
+  40% {
+    background-color:  #811AFF;
+  }
+  60% {
+    background-color: var(--quaternary-01);
+  }
+  80% {
+    background-color: var(--secondary-01);
+  }
+  100% {
+    background-color: var(--tertiary-01);
+  }
+}
+
+@keyframes heroFade {
+  0% {
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 1;
+  }
+  28% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+

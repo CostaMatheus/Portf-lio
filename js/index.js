@@ -233,8 +233,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
-
 const tags = document.querySelectorAll('.hero-tag-animation');
 let index = 0;
 
